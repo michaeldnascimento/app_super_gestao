@@ -13,13 +13,14 @@
     <div class="informacao-pagina">
         <div class="contato-principal">
             <!-- trasendo o formulario contato -->
-            @component('site.layouts._components.form_contato', ['classe' => 'borda-preta'])
+            @component('site.layouts._components.form_contato', ['classe' => 'borda-preta', 'motivo_contatos' => $motivo_contatos])
                 <p>A nossa equipe entrará em contato.</p>
                 <p>Nosso tempo de resposta é de 48 Horas</p>
             @endcomponent
         </div>
     </div>
 </div>
+
 
 <div class="rodape">
     <div class="redes-sociais">

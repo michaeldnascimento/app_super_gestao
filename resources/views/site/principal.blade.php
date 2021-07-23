@@ -34,7 +34,7 @@
             <h1>Contato</h1>
             <p>Caso tenha qualquer dúvida por favor entre em contato com nossa equipe pelo formulário abaixo.<p>
                 <!-- trasendo o formulario contato -->
-            @component('site.layouts._components.form_contato',  ['classe' => 'borda-branca'])
+            @component('site.layouts._components.form_contato',  ['classe' => 'borda-branca', 'motivo_contatos' => $motivo_contatos] )
                 <!-- caso deseje passar alguma informação contida somente nessa pagina, basta colocar o $slot no form contato -->
                 <h3>Teste</h3>
             @endcomponent

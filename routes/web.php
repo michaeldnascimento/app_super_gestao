@@ -31,7 +31,7 @@ return 'Contato';
 Route::get('/', 'PrincipalController@principal')->name('site.index');
 Route::get('/sobre-nos', 'SobreNosController@SobreNos')->name('site.sobrenos');
 Route::get('/contato', 'ContatoController@Contato')->name('site.contato');
-Route::post('/contato', 'ContatoController@Contato')->name('site.contato');
+Route::post('/contato', 'ContatoController@Salvar')->name('site.contato');
 Route::get('/login', function() {Return 'Login';})->name('site.login');
 
 /** agrupando rotas */
