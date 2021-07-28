@@ -28,17 +28,20 @@ return 'Contato';
 
  */
 
+// os middleware pode ser adicioonado aqui em rotas invividualmente, ou se nescessario adicionar todas as rotas web de uma vez só, vai no arquivo kernel
+
 Route::get('/', 'PrincipalController@principal')->name('site.index');
-Route::get('/sobre-nos', 'SobreNosController@SobreNos')->name('site.sobrenos');
 Route::get('/contato', 'ContatoController@Contato')->name('site.contato');
+Route::get('/sobre-nos', 'SobreNosController@SobreNos')->name('site.sobrenos');
 Route::post('/contato', 'ContatoController@Salvar')->name('site.contato');
 Route::get('/login', function() {Return 'Login';})->name('site.login');
 
 /** agrupando rotas */
-Route::prefix('/app')->group(function(){
-Route::get('/clientes', function() {Return 'Clientes';})->name('app.clientes');
-Route::get('/fornecedores', 'FornecedorController@index')->name('app.fornecedores');
-Route::get('/produtos', function() {Return 'Produtos';})->name('app.produtos');
+Route::middleware('autenticacao:padrao,visitante')->prefix('/app')->group(function() //caso deseje acessar mais de um middleware middleware('log.acesso', 'autenticacao')
+{
+    Route::get('/clientes', function() {Return 'Clientes';})->name('app.clientes');
+    Route::get('/fornecedores', 'FornecedorController@index')->name('app.fornecedores');
+    Route::get('/produtos', function() {Return 'Produtos';})->name('app.produtos');
 });
 
 Route::get('/teste/{p1}/{p2}', 'TesteController@teste')->name('teste');
