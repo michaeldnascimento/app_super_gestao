@@ -17,6 +17,17 @@ class AutenticacaoMiddleware
      */
     public function handle($request, Closure $next, $metodo_autenticacao, $perfil)
     {
+
+        session_start();
+
+        if (isset($_SESSION['email']) && $_SESSION['email'] != ''){
+            //envia para o proximo middleware
+            return $next($request);
+        }else{
+            return redirect()->route('site.login', ['erro' => 2]);
+        }
+
+        /**
         echo $metodo_autenticacao. '<br>' .$perfil.'<br>';
         //verifica se o usuariop possui acesso a rota
 
@@ -39,13 +50,13 @@ class AutenticacaoMiddleware
             echo 'Verifica o usuario e senha no AD'. '<br>';
         }
 
-
-
         if(true){
+         * //envia para o proximo middleware
             return $next($request);
         }else{
             return Response('Acesso negado! Rota exige autenticação!!!');
         }
+         * */
 
     }
 }
