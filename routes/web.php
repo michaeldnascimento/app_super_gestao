@@ -44,8 +44,18 @@ Route::middleware('autenticacao:padrao,visitante')->prefix('/app')->group(functi
     Route::get('/home', 'HomeController@index')->name('app.home');
     Route::get('/sair', 'LoginController@sair')->name('app.sair');
     Route::get('/cliente', 'ClienteController@index')->name('app.cliente');
+
     Route::get('/fornecedor', 'FornecedorController@index')->name('app.fornecedor');
-    Route::get('/produto', 'ProdutoController@index')->name('app.produto');
+    Route::post('/fornecedor/listar', 'FornecedorController@listar')->name('app.fornecedor.listar');
+    Route::get('/fornecedor/listar', 'FornecedorController@listar')->name('app.fornecedor.listar');
+    Route::get('/fornecedor/adicionar', 'FornecedorController@adicionar')->name('app.fornecedor.adicionar');
+    Route::post('/fornecedor/adicionar', 'FornecedorController@adicionar')->name('app.fornecedor.adicionar');
+    Route::get('/fornecedor/editar/{id}/{msg?}', 'FornecedorController@editar')->name('app.fornecedor.editar');
+    Route::get('/fornecedor/excluir/{id}/{msg?}', 'FornecedorController@excluir')->name('app.fornecedor.excluir');
+
+
+    //produtos usando o resurces, forma melhor estruturada pelo laravel
+    Route::resource('produto', 'ProdutoController'); // ele automaticamente ele cria todas as rotas ao inves de criar manuamente todas de resouces
 });
 
 Route::get('/teste/{p1}/{p2}', 'TesteController@teste')->name('teste');
