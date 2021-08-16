@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Produto;
+use App\Item;
+use App\ProdutoDetalhe;
 use App\Unidade;
 use Illuminate\Http\Request;
 
@@ -16,7 +18,26 @@ class ProdutoController extends Controller
     public function index(Request $request)
     {
         //
-        $produtos = Produto::paginate(10);
+        //$produtos = Produto::paginate(10);
+        //$produtos = Item::paginate(10); //metodo padrão - lazy loading
+        $produtos = Item::with(['itemDetalhe'])->paginate(10); //metodo agil - eager loading
+
+        /**
+         * Forma de trazer o detalhes pro produto, e enviar ao form
+
+        foreach ($produtos as $key => $produto){
+
+            //collection produtoDetalhe
+            $produtoDetalhe = ProdutoDetalhe::where('produto_id', $produto->id)->first();
+
+            //produtoDetalhe
+            if(isset($produtoDetalhe)){
+                $produtos[$key]['comprimento'] = $produtoDetalhe->comprimento;
+                $produtos[$key]['largura'] = $produtoDetalhe->largura;
+                $produtos[$key]['altura'] = $produtoDetalhe->altura;
+            }
+        }
+         */
 
         return view('app.produto.index', ['produtos' => $produtos, 'request' => $request->all()]);
     }
@@ -108,6 +129,7 @@ class ProdutoController extends Controller
 
         $unidades = Unidade::all();
         return view('app.produto.edit', ['produto' => $produto, 'unidades' => $unidades]);
+        //return view('app.produto.create', ['produto' => $produto, 'unidades' => $unidades]);
 
     }
 

@@ -56,6 +56,9 @@ Route::middleware('autenticacao:padrao,visitante')->prefix('/app')->group(functi
 
     //produtos usando o resurces, forma melhor estruturada pelo laravel
     Route::resource('produto', 'ProdutoController'); // ele automaticamente ele cria todas as rotas ao inves de criar manuamente todas de resouces
+
+    //Produto detalhes
+    Route::resource('produto-detalhe', 'ProdutoDetalheController');
 });
 
 Route::get('/teste/{p1}/{p2}', 'TesteController@teste')->name('teste');
