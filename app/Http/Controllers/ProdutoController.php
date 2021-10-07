@@ -20,7 +20,7 @@ class ProdutoController extends Controller
         //
         //$produtos = Produto::paginate(10);
         //$produtos = Item::paginate(10); //metodo padrão - lazy loading
-        $produtos = Item::with(['itemDetalhe'])->paginate(10); //metodo agil - eager loading
+        $produtos = Item::with(['itemDetalhe', 'fornecedor'])->paginate(10); //metodo agil - eager loading
 
         /**
          * Forma de trazer o detalhes pro produto, e enviar ao form

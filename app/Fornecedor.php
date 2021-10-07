@@ -13,4 +13,11 @@ class Fornecedor extends Model
     protected $table = 'fornecedores';
     //para consegui enviar dados usando o tiker em forma de array ex: \App\Fornecedor::create(['nome'=>'Fornecedor qwe', 'site'=>'fornecedorqwre.com.br', 'uf'=>'SP', 'emai'=>'contato@fornecedorqwe.com.br']);
     protected $fillable = ['nome', 'site', 'uf', 'email'];
+
+    public function produtos()
+    {
+        //Eloquent ORM relacionamento de 1 para N
+        return $this->hasMany('App\Item', 'fornecedor_id', 'id');
+
+    }
 }
